@@ -74,7 +74,10 @@ router.get('/del',function(req, res, next){
 	if(name){
 		data = {name: name};
 	}
-	mongooseClientInstance.remove(collection,data,function(ret){
+	/*mongooseClientInstance.remove(collection,data,function(ret){
+		res.send(ret);
+	});*/
+	mongooseClientInstance.update(collection,data,{isDeleted: true},{multi: true},function(ret){
 		res.send(ret);
 	});
 });
@@ -90,6 +93,16 @@ router.get('/find',function(req, res, next){
 		data = {name: name};
 	}
 	mongooseClientInstance.find(collection,data,function(ret){
+		res.send(ret);
+	});
+});
+
+router.get('/queryList',function(req, res, next){
+	let url = req.query.url;
+	mongooseClientInstance.find(collection,{isDeleted: false,url: url},function(ret){
+		if(ret.status){
+			ret.total = ret.data.length;
+		}
 		res.send(ret);
 	});
 });
