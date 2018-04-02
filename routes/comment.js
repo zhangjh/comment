@@ -13,17 +13,8 @@ router.get('/save',function(req, res, next){
 		content: "test: 第一条评论",
 		url: "/"
 	};
-	mongooseClientInstance.insert(collection,data,function(err,res){
-		if(err){
-			res.send({
-				status: false,
-				errMsg: err
-			});
-		}else {
-			res.send({
-				status: true
-			});
-		}
+	mongooseClientInstance.insert(collection,data,function(ret){
+		res.send(ret);
 	});
 });
 
