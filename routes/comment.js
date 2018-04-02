@@ -1,24 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var mongooseClient = require('mongoose-client');
 
-// mongoose config
-var mongooseClientInstance = new mongooseClient({
-	DB_IP: 'xxxxx',
-	DB_PORT: 'xxxx',
-	DB_NAME: 'comment',
-	schema: {
-		infos: {
-			name: { type: String },
-			email: { type: String },
-			website: { type: String },
-			content: { type: String },
-			url: { type: String },
-			isDeleted: { type: Boolean, default: false},
-			gmtCreate: { type: Date, default: Date.now}
-		}
-	}
-});
+var mongooseClientInstance = require('../conf/config');
 
 let collection = "infos";
 
