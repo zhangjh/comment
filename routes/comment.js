@@ -56,6 +56,10 @@ router.post('/save',function(req, res, next){
 						status: false,
 						errorMsg: "大侠手速惊人，练过弹指神通？"
 					});
+				}else {
+					mongooseClientInstance.insert(collection,data,function(ret){
+						res.send(ret);
+					});
 				}
 			}else {
 				mongooseClientInstance.insert(collection,data,function(ret){
