@@ -5,7 +5,7 @@ var mongooseClientInstance = require('../conf/config');
 
 let collection = "infos";
 
-router.get('/save',function(req, res, next){
+router.post('/save',function(req, res, next){
 	/*let data = {
 		name: "zhangjh",
 		email: "zhangjh@qq.com",
@@ -14,12 +14,12 @@ router.get('/save',function(req, res, next){
 		url: "/"
 	};*/
 	let data = {};
-	let name = req.query.name;
-	let email = req.query.email;
-	let website = req.query.website;
-	let content = req.query.content;
-	let url = req.query.url;
-	let replyId = req.query.replyId;
+	let name = req.body.name;
+	let email = req.body.email;
+	let website = req.body.website;
+	let content = req.body.content;
+	let url = req.body.url;
+	let replyId = req.body.replyId;
 	data = {
 		name: name,
 		email: email,
