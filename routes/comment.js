@@ -19,12 +19,14 @@ router.get('/save',function(req, res, next){
 	let website = req.query.website;
 	let content = req.query.content;
 	let url = req.query.url;
+	let replyId = req.query.replyId;
 	data = {
 		name: name,
 		email: email,
 		website: website,
 		content: content,
-		url: url
+		url: url,
+		replyId: replyId
 	};
 	if(!name){
 		res.send({

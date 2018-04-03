@@ -11,6 +11,7 @@ var mongooseClientInstance = new mongooseClient({
 			website: { type: String },
 			content: { type: String },
 			url: { type: String },
+			replyId: { type: String },
 			isDeleted: { type: Boolean, default: false},
 			gmtCreate: { type: Date, default: Date.now}
 		}
