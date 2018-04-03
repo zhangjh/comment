@@ -56,13 +56,13 @@ router.get('/save',function(req, res, next){
 						status: false,
 						errorMsg: "大侠手速惊人，练过弹指神通？"
 					});
-					return;
 				}
+			}else {
+				mongooseClientInstance.insert(collection,data,function(ret){
+					res.send(ret);
+				});	
 			}
 		}
-		mongooseClientInstance.insert(collection,data,function(ret){
-			res.send(ret);
-		});
 	},{gmtCreate: -1});
 });
 
