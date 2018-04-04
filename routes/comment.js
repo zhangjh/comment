@@ -89,16 +89,7 @@ router.get('/del',function(req, res, next){
 });
 
 router.get('/find',function(req, res, next){
-	let data = {};
-	let url = req.query.url;
-	let name = req.query.name;
-	if(url){
-		data = {url: url};
-	}
-	if(name){
-		data = {name: name};
-	}
-	mongooseClientInstance.find(collection,data,function(ret){
+	mongooseClientInstance.find(collection,req.query,function(ret){
 		res.send(ret);
 	});
 });
