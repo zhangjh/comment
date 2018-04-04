@@ -110,4 +110,10 @@ router.get('/queryAll',function(req, res, next){
 	});
 });
 
+router.get('/update',function (req, res, next) {
+	mongooseClientInstance.update(collection,req.query.condition,req.qurey.data,{},function (ret) {
+		res.send(ret);
+    });
+});
+
 module.exports = router;
