@@ -13,7 +13,8 @@ var mongooseClientInstance = new mongooseClient({
 			url: { type: String },
 			replyId: { type: String },
 			isDeleted: { type: Boolean, default: false},
-			gmtCreate: { type: Date, default: Date.now}
+			gmtCreate: { type: Date, default: Date.now},
+			readed: { type: Boolean, default: false}
 		}
 	}
 });
