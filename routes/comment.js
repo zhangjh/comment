@@ -1,7 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var mongooseClientInstance = require('../conf/config');
+const mongooseClientInstance = require('../conf/config');
+const sendmail = require('../conf/sendmail');
 
 let collection = "infos";
 
@@ -113,6 +114,27 @@ router.get('/queryAll',function(req, res, next){
 router.get('/update',function (req, res, next) {
 	mongooseClientInstance.update(collection,req.query.condition,req.query.data,{},function (ret) {
 		res.send(ret);
+    });
+});
+
+router.post('/sendMail',function (req, res, next) {
+	let mail = req.body.email;
+	let url = req.body.url;
+	let subject = req.body.subject;
+	let isReply = req.body.replyId;
+	let html = "收到评论：<a href='" + url + "'>点击查看</a>";
+	if(isReply){
+		html = "你的评论收到了回复，<a href='" + url + "'>点击查看</a>";
+	}
+
+	sendmail({
+		from: "postmaster@zhangjh.me",
+		to: mail,
+		subject: subject,
+		html: html
+	},function (err, reply) {
+		console.log(err && err.stack);
+		console.dir(reply);
     });
 });
 
