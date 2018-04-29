@@ -6,13 +6,6 @@ var mongooseClientInstance = require('../conf/config');
 let collection = "infos";
 
 router.post('/save',function(req, res, next){
-	/*let data = {
-		name: "zhangjh",
-		email: "zhangjh@qq.com",
-		website: "http://zhangjh.me",
-		content: "test: 第一条评论",
-		url: "/"
-	};*/
 	let data = {};
 	let name = req.body.name;
 	let email = req.body.email;
@@ -29,19 +22,19 @@ router.post('/save',function(req, res, next){
 		replyId: replyId
 	};
 	if(!name){
-		res.send({
+		return res.send({
 			status: false,
 			errorMsg: "大侠请留名"
 		});
 	}
 	if(!email){
-		res.send({
+		return res.send({
 			status: false,
 			errorMsg: "留个邮箱吧，一有回复我就提醒你"
 		});
 	}
 	if(!content){
-		res.send({
+		return res.send({
 			status: false,
 			errorMsg: "大侠，逗我呢？一个字不留咋提交啊"
 		});
@@ -52,18 +45,18 @@ router.post('/save',function(req, res, next){
 			if(ret.data.length){
 				let createTime = ret.data[0].gmtCreate;
 				if(Math.abs(createTime - new Date()) < 10000){
-					res.send({
+					return res.send({
 						status: false,
 						errorMsg: "大侠手速惊人，练过弹指神通？"
 					});
 				}else {
 					mongooseClientInstance.insert(collection,data,function(ret){
-						res.send(ret);
+						return res.send(ret);
 					});
 				}
 			}else {
 				mongooseClientInstance.insert(collection,data,function(ret){
-					res.send(ret);
+					return res.send(ret);
 				});	
 			}
 		}
@@ -84,13 +77,13 @@ router.get('/del',function(req, res, next){
 		res.send(ret);
 	});*/
 	mongooseClientInstance.update(collection,data,{isDeleted: true},{multi: true},function(ret){
-		res.send(ret);
+		return res.send(ret);
 	});
 });
 
 router.get('/find',function(req, res, next){
 	mongooseClientInstance.find(collection,Object.assign(req.query,{isDeleted: false}),function(ret){
-		res.send(ret);
+		return res.send(ret);
 	});
 });
 
@@ -100,19 +93,19 @@ router.get('/queryList',function(req, res, next){
 		if(ret.status){
 			ret.total = ret.data.length;
 		}
-		res.send(ret);
+		return res.send(ret);
 	});
 });
 
 router.get('/queryAll',function(req, res, next){
 	mongooseClientInstance.find(collection,{},function(ret){
-		res.send(ret);
+		return res.send(ret);
 	});
 });
 
 router.get('/update',function (req, res, next) {
 	mongooseClientInstance.update(collection,req.query.condition,req.query.data,{},function (ret) {
-		res.send(ret);
+		return res.send(ret);
     });
 });
 
