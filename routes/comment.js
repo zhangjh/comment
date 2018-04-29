@@ -111,24 +111,27 @@ router.get('/update',function (req, res, next) {
 });
 
 router.post('/sendMail',function (req, res, next) {
-	let mail = req.body.email;
+	let mail = req.body.mail;
 	let url = req.body.url;
 	let subject = req.body.subject;
 	let isReply = req.body.replyId;
-	let html = "收到评论：<a href='" + url + "'>点击查看</a>";
+	let urlPre = "http://zhangjh.me";
+	let html = "收到评论：<a href='" + urlPre + url + "'>点击查看</a>";
 	if(isReply){
-		html = "你的评论收到了回复，<a href='" + url + "'>点击查看</a>";
+		html = "你的评论收到了回复，<a href='" + urlPre + url + "'>点击查看</a>";
 	}
 
-	sendmail({
-		from: "postmaster@zhangjh.me",
-		to: mail,
-		subject: subject,
-		html: html
-	},function (err, reply) {
-		console.log(err && err.stack);
-		console.dir(reply);
-    });
+	sendmail(mail,subject,"",html,(err,info) => {
+		if(err){
+			return res.json({
+				status: false,
+				errorMsg: err
+			});
+		}
+		return res.json({
+			status: true
+		});
+	});
 });
 
 module.exports = router;
