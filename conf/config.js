@@ -1,6 +1,6 @@
 // mongoose config
-var mongooseClient = require('mongoose-client');
-var mongooseClientInstance = new mongooseClient({
+const mongooseClient = require('mongoose-client');
+const mongooseClientInstance = new mongooseClient({
 	DB_IP: 'localhost',
 	DB_PORT: '20172',
 	DB_NAME: 'comment',
