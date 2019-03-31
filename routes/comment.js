@@ -6,6 +6,16 @@ const sendmail = require('../conf/sendmail');
 
 let collection = "infos";
 
+let inputCheck = function(json) {
+	let pattern = /script/i;
+	for(let key in json) {
+		if(pattern.test(json[key])) {
+			return false;
+		}	
+	}
+	return true;
+};
+
 router.post('/save',function(req, res, next){
 	let data = {};
 	let name = req.body.name;
@@ -41,6 +51,13 @@ router.post('/save',function(req, res, next){
 		});
 	}
 
+	if(!inputCheck(data)) {
+		return res.send({
+			status: false,
+			errorMsg: "大侠，请不要对小站做破坏哦~"
+		});
+	}
+
 	mongooseClientInstance.find(collection,{name: name, url: url},function(ret){
 		if(ret.status){
 			if(ret.data.length){
@@ -70,7 +87,7 @@ router.get('/del',function(req, res, next){
 	let name = req.query.name;
 	if(url){
 		data = {url: url};
-	};
+	}
 	if(name){
 		data = {name: name};
 	}
