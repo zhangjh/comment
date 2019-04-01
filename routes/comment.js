@@ -7,7 +7,7 @@ const sendmail = require('../conf/sendmail');
 let collection = "infos";
 
 let inputCheck = function(json) {
-	let pattern = /script/i;
+	let pattern = /\<script\>/i;
 	for(let key in json) {
 		if(pattern.test(json[key])) {
 			return false;
