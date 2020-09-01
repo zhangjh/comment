@@ -4,18 +4,18 @@ const sendMail = function(to,subject,text,html,cb){
 	nodemailer.createTestAccount((err, account) => {
 		// create reusable transporter object using the default SMTP transport
 		let transporter = nodemailer.createTransport({
-			host: 'smtp.126.com',
+			host: 'xxxx',
 			port: 465,
 			secure: true, // true for 465, false for other ports
 			auth: {
-				user: "favlinks@126.com",
-				pass: "qazxsw11111"
+				user: "xxxx",
+				pass: "xxxx"
 			}
 		});
 
 		// setup email data with unicode symbols
 		let mailOptions = {
-			from: 'favlinks@126.com',
+			from: 'xxxx',
 			to: to, // list of receivers
 			subject: subject, // Subject line
 			text: text || "", // plain text body
