@@ -6,4 +6,4 @@ COPY ./ /root/web/comment
 
 ## comment
 RUN cd /root/web/comment
-RUN npm i -d && npm run start 
+RUN npm run start 
