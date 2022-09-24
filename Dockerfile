@@ -6,3 +6,4 @@ COPY ./ /comment
 
 ## comment
 RUN npm i
+RUN npm run start &> comment.log &
