@@ -28,5 +28,5 @@ jobs:
         run: |
           echo Add other actions to build,
           docker build -t comment .
-          docker tag njhxzhangjh/comment
+          docker tag comment njhxzhangjh/comment
           docker push njhxzhangjh/comment
