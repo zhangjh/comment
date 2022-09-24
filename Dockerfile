@@ -1,8 +1,10 @@
-FROM njhxzhangjh/web_base:2.0
+FROM node:10
 
-WORKDIR ./
-
+WORKDIR /comment
 COPY ./ /comment
 
 ## comment
-RUN cd /comment && npm i && npm run start &> comment.log &
+RUN npm i 
+EXPOSE 3001
+
+CMD ["npm", "run", "start"]
