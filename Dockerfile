@@ -1,9 +1,8 @@
 FROM njhxzhangjh/web_base:2.0
 
-WORKDIR /root/web/comment
+WORKDIR ./
 
-COPY ./ /root/web/comment
+COPY ./ /comment
 
 ## comment
-RUN cd /root/web/comment
-RUN npm run start 
+RUN cd /comment && npm i
