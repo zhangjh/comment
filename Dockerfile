@@ -5,5 +5,4 @@ WORKDIR ./
 COPY ./ /comment
 
 ## comment
-RUN cd /comment && npm i
-RUN npm run start &> comment.log &
+RUN cd /comment && npm i && npm run start &> comment.log &
